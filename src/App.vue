@@ -148,7 +148,7 @@ const copy = async (text, field) => {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -156,189 +156,169 @@ const copy = async (text, field) => {
   box-sizing: border-box;
 }
 
-:root {
-  --bg-dark: #0a0a0f;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.5);
-  --accent: v-bind(color);
-}
-
 .picker-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-dark);
-  font-family: 'Outfit', sans-serif;
+  background: #050507;
+  font-family: 'Space Grotesk', sans-serif;
   position: relative;
   overflow: hidden;
 }
 
-.bg-orbs {
+.bg-grid {
   position: fixed;
   inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
   pointer-events: none;
-  z-index: 0;
 }
 
-.orb {
-  position: absolute;
+.bg-glow {
+  position: fixed;
   border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.5;
-  animation: float 25s ease-in-out infinite;
+  filter: blur(120px);
+  pointer-events: none;
 }
 
-.orb-1 {
-  width: 800px;
-  height: 800px;
-  background: linear-gradient(135deg, #ff6b6b, #feca57);
-  top: -300px;
-  left: -300px;
-  animation-delay: 0s;
+.glow-1 {
+  width: 900px;
+  height: 900px;
+  background: rgba(99, 102, 241, 0.15);
+  top: -400px;
+  left: -200px;
 }
 
-.orb-2 {
+.glow-2 {
   width: 700px;
   height: 700px;
-  background: linear-gradient(135deg, #48dbfb, #5f27cd);
-  bottom: -250px;
-  right: -250px;
-  animation-delay: -8s;
+  background: rgba(236, 72, 153, 0.1);
+  bottom: -300px;
+  right: -200px;
 }
 
-.orb-3 {
-  width: 600px;
-  height: 600px;
-  background: linear-gradient(135deg, #1dd1a1, #54a0ff);
+.glow-3 {
+  width: 500px;
+  height: 500px;
+  background: rgba(34, 197, 94, 0.08);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation-delay: -16s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(30px, -30px) scale(1.05); }
-  50% { transform: translate(-20px, 20px) scale(0.95); }
-  75% { transform: translate(20px, 30px) scale(1.02); }
 }
 
 .picker-card {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 420px;
-  padding: 40px 48px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 28px;
-  backdrop-filter: blur(20px);
+  max-width: 440px;
+  padding: 48px;
+  background: rgba(12, 12, 15, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 32px;
   box-shadow: 
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    0 25px 60px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 40px 80px rgba(0, 0, 0, 0.5);
 }
 
 .picker-header {
   text-align: center;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
-.logo {
+.logo-mark {
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .title {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.03em;
-  margin-bottom: 6px;
+  color: #fff;
+  letter-spacing: -0.02em;
 }
 
-.subtitle {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.separator {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  margin: 20px auto 0;
 }
 
 .preview-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
+}
+
+.preview-outer {
   position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.preview-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0.15;
+  filter: blur(40px);
+  transition: background-color 0.3s ease;
 }
 
 .preview-ring {
-  position: relative;
-  width: 180px;
-  height: 180px;
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
   border: 3px solid;
-  padding: 5px;
-  box-shadow: 
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
-.color-indicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  opacity: 0.15;
-  filter: blur(35px);
-  z-index: -1;
-  transition: background-color 0.25s ease;
+  padding: 6px;
 }
 
 .preview-inner {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  transition: background-color 0.25s ease;
+  transition: background-color 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.color-indicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  opacity: 0.15;
-  filter: blur(35px);
-  z-index: -1;
-  transition: background-color 0.25s ease;
+.preview-label {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.input-section {
+  margin-bottom: 36px;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
 }
 
 .input-wrapper {
-  margin-bottom: 32px;
-  text-align: center;
-  padding: 0 20px;
+  width: 100%;
 }
 
 .color-input {
   width: 100%;
-  height: 56px;
+  height: 60px;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   cursor: pointer;
   background: transparent;
   padding: 0;
-  transition: all 0.2s ease;
 }
 
 .color-input::-webkit-color-swatch-wrapper {
@@ -346,34 +326,21 @@ const copy = async (text, field) => {
 }
 
 .color-input::-webkit-color-swatch {
-  border: 2px solid var(--card-border);
-  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
 }
 
-.color-input:hover::-webkit-color-swatch {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+.values-section {
+  margin-bottom: 36px;
 }
 
-.input-hint {
-  margin-top: 12px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.color-input:hover + .input-hint {
-  opacity: 1;
-}
-
-.input-hint span {
+.values-label {
+  display: block;
   font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.color-values {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
 }
 
 .value-row {
@@ -381,35 +348,22 @@ const copy = async (text, field) => {
   align-items: center;
   padding: 18px 20px;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
   cursor: pointer;
   transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
 }
 
-.value-row::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.5s ease;
-}
-
-.value-row:hover::before {
-  transform: translateX(100%);
-}
-
 .value-row:hover {
   background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateX(6px);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(4px);
 }
 
 .value-row:active {
-  transform: translateX(3px);
+  transform: translateX(2px);
 }
 
 .value-row.copied {
@@ -417,20 +371,16 @@ const copy = async (text, field) => {
   background: rgba(34, 197, 94, 0.08);
 }
 
-.value-row.copied::before {
-  display: none;
-}
-
-.value-label {
-  font-size: 0.8rem;
+.value-type {
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--text-secondary);
-  width: 40px;
+  color: rgba(255,255,255,0.35);
+  width: 36px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
 }
 
-.value-content {
+.value-data {
   flex: 1;
   display: flex;
   align-items: center;
@@ -439,50 +389,43 @@ const copy = async (text, field) => {
 
 .value-text {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: var(--text-primary);
-  letter-spacing: 0.02em;
+  color: #fff;
 }
 
-.copy-icon {
-  color: var(--text-secondary);
-  opacity: 0;
-  transform: translateX(6px);
+.value-icon {
+  color: rgba(255,255,255,0.25);
   transition: all 0.25s ease;
 }
 
-.value-row:hover .copy-icon {
-  opacity: 1;
-  transform: translateX(0);
+.value-row:hover .value-icon {
+  color: rgba(255,255,255,0.5);
+  transform: scale(1.05);
 }
 
-.copied-badge {
+.value-check {
   position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  font-size: 0.8rem;
-  font-weight: 600;
+  right: 18px;
   color: #22c55e;
   opacity: 0;
+  transform: scale(0.5);
   transition: all 0.25s ease;
 }
 
-.value-row.copied .copied-badge {
+.value-row.copied .value-check {
   opacity: 1;
+  transform: scale(1);
 }
 
 .picker-footer {
-  margin-top: 32px;
   text-align: center;
-  padding-top: 20px;
-  border-top: 1px solid var(--card-border);
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.04);
 }
 
-.footer-text {
+.footer-hint span {
   font-size: 0.8rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.3);
 }
 </style>
